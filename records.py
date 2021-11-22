@@ -355,19 +355,22 @@ class Connection(object):
         Parameters can, optionally, be provided. Returns a RecordCollection,
         which can be iterated over to get result rows as dictionaries.
         """
-
+        
         # Execute the given query.
         cursor = self._conn.execute(text(query), **params) # TODO: PARAMS GO HERE
 
-        # Row-by-row Record generator.
-        row_gen = (Record(cursor.keys(), row) for row in cursor)
+        try:
+            # Row-by-row Record generator.
+            row_gen = (Record(cursor.keys(), row) for row in cursor)
 
-        # Convert psycopg2 results to RecordCollection.
-        results = RecordCollection(row_gen)
+            # Convert psycopg2 results to RecordCollection.
+            results = RecordCollection(row_gen)
 
-        # Fetch all results if desired.
-        if fetchall:
-            results.all()
+            # Fetch all results if desired.
+            if fetchall:
+                results.all()
+        except:
+            return None
 
         return results
 
