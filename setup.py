@@ -50,7 +50,7 @@ requires = ['SQLAlchemy;python_version>="3.0"',
             'openpyxl<2.5.0', # temporary fix to issue #142
             'tablib>=0.11.4',
             'docopt']
-version = '0.5.3-kbr'
+version = '0.5.3'
 
 
 def read(f):
